@@ -12,5 +12,10 @@ export default {
   components: {
     Login,
   },
+
+  // WIP - FOR DEMO
+  mounted() {
+    this.$router.push("data");
+  },
 };
 </script>
