@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="login-view">
     <Login />
   </div>
 </template>
@@ -11,11 +11,6 @@ export default {
   name: 'LoginView',
   components: {
     Login,
-  },
-
-  // WIP - FOR DEMO
-  mounted() {
-    this.$router.push("data");
   },
 };
 </script>
