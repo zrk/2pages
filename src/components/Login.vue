@@ -25,10 +25,15 @@
       Log In
     </button>
 
+    <div v-show="error" class="login__error">
+      {{ error }}
+    </div>
+
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import InputField from './InputField.vue';
 
 export default {
@@ -63,14 +68,34 @@ export default {
   },
 
   computed: {
-    isSubmitEnabled() { return !this.isOnceSubmitted || (this.email && this.password); },
+    ...mapState({
+      stateError: 'error',
+      isLoggedIn: 'loggedIn',
+      isLoading: 'isLoggingIn',
+    }),
+
+    isFormValid() { return this.email && this.password; },
+    isSubmitEnabled() { return (!this.isOnceSubmitted || this.isFormValid) && !this.isLoading; },
+
+    error() {
+      if (this.stateError) return this.stateError;
+      if (this.isOnceSubmitted && !this.isFormValid) return 'Please fill in correct email and password';
+      return '';
+    },
   },
 
   methods: {
-    submit() {
+    ...mapActions(['login']),
+
+    async submit() {
       this.isOnceSubmitted = true;
 
-      // TODO: Actions on submit
+      if (!this.isFormValid) return;
+
+      try { await this.login({ email: this.email, password: this.password }); }
+      catch { return; }
+
+      this.$router.push('data');
     },
   },
 };
