@@ -25,3 +25,25 @@ export default {
   data() { return { properEmail, properPassword }; },
 };
 </script>
+
+
+<style>
+.login-view {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-view__comment{
+  text-align: center;
+}
+
+.login-view__form {
+  border: 2px solid;
+  padding: 10px;
+}
+</style>

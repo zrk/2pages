@@ -1,7 +1,8 @@
 <template>
-  <div class="login">
+  <div class="login" :class="{ loading: isLoading }">
 
     <InputField
+      class="login__field"
       v-model="email"
       name="email"
       label="Email"
@@ -10,6 +11,7 @@
     />
 
     <InputField
+      class="login__field"
       type="password"
       v-model="password"
       name="password"
@@ -19,6 +21,7 @@
     />
 
     <button
+      class="login__submit"
       :disabled="!isSubmitEnabled"
       @click="submit"
     >
@@ -100,3 +103,34 @@ export default {
   },
 };
 </script>
+
+
+<style lang="scss">
+.login {
+  display: flex;
+  flex-direction: column;
+}
+
+.loading {
+  .login__submit {
+    border-color: green;
+  }
+}
+
+.login__field,
+.login__submit,
+.login__error {
+  margin: 10px;
+}
+
+.login__submit,
+.login__error {
+  padding: 10px;
+}
+
+.login__error {
+  text-align: center;
+  color: red;
+  border: 2px solid;
+}
+</style>
